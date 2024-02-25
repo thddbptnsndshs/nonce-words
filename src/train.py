@@ -17,8 +17,8 @@ if __name__ == '__main__':
     with open(args.config_path) as cnf:
         config = yaml.safe_load(cnf)
 
-        wandb.login(key='7a9437f52186ae00051016cfdf42d1ae9ac2a248')
-    wandb.init(project=config['wandb']['project'], name=extract_lang_name(config['data']['vocab_path']))
+    wandb.login(key='7a9437f52186ae00051016cfdf42d1ae9ac2a248')
+    run = wandb.init(project=config['wandb']['project'], name=extract_lang_name(config['data']['vocab_path']))
 
     logging.basicConfig(filename=config['log_path'],
                         filemode='w',
@@ -78,4 +78,11 @@ if __name__ == '__main__':
         evaluate_on_prefixes(model, wordlist)
 
     model.eval()
-    torch.save(model, 'models/' + extract_lang_name(config['data']['vocab_path']) + '.pt')
+    model_path = 'models/' + extract_lang_name(config['data']['vocab_path']) + '.pt'
+    # torch.save(model, 'models/' + model_path)
+    torch.save(model.state_dict(), model_path)
+    artifact = wandb.Artifact('model', type='model')
+
+    artifact.add_file(model_path)
+    run.log_artifact(artifact)
+    run.finish()
