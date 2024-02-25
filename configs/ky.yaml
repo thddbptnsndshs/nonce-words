@@ -1,0 +1,29 @@
+data:
+  frequency_sampling: false
+  max_word_length: 10
+  min_word_length: 3
+  vocab_path: ./data/vocab_txts/ky_splits.txt
+device: cpu
+eval:
+  n_trials: 10
+  num_prefixes: 5
+  prefix_length: 2
+generate:
+  max_len: 256
+  temperature: 1.0
+log_path: ./logs/ky.log
+model:
+  embedding:
+    embedding_dim: 64
+  gru:
+    batch_first: true
+    hidden_size: 256
+    input_size: 64
+    num_layers: 5
+train:
+  batch_size: 256
+  epochs: 1
+  lr: 0.0001
+  optim: null
+wandb:
+  project: nonce_lstm
