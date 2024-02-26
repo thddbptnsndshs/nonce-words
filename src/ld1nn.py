@@ -17,6 +17,7 @@ def ld1nn(word_sample: [str],
         3. Compute the probability of a word response for the given stimulus based on the relative frequency of words among the nearest neighbors.
 
     For more information about LD1NN, see DOI: 10.1075/ml.6.1.02keu
+    All credits go to Wuggy's code, see https://github.com/WuggyCode/wuggy/tree/master
 
     Parameters:
         word_sample: a list of real words. Make sure this list contains at least all words which all unique words in nonword_sample were based on. This list must contain the same amount of items as nonword_sample.
@@ -24,9 +25,7 @@ def ld1nn(word_sample: [str],
         nonword_sample: a list of nonwords words. This list must contain the same amount of items as word_sample.
 
         word_as_reference_level: set the word as reference level. If set to true, the odds returned by LD1NN represent how much likelier it is for a stimulus predicted as a word to be a word than a stimulus with a nonword prediction. If set to true, the vice versa is calculated.
-    .. include:: ../../documentation/evaluators/ld1nn.md
     """
-    # TODO: implement a parallel processing option
 
     if (len(word_sample) != len(nonword_sample)):
         raise ValueError("Both sample lists need to contain the same amount of strings.")
