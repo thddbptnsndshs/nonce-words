@@ -1,0 +1,30 @@
+device: 'cuda'
+log_path: './log.txt'
+data:
+  vocab_path: './data/vocab_txts/uk_splits.txt'
+  frequency_sampling: false
+  min_word_length: 3
+  max_word_length: 10
+model:
+  embedding:
+    embedding_dim: 64
+  gru:
+    input_size: 64
+    hidden_size: 256
+    num_layers: 5
+    batch_first: true
+train:
+  optim:
+  lr: 0.0001
+  epochs: 50
+  batch_size: 1024
+generate:
+  max_len: 256
+  temperature: 0.5
+eval:
+  prefix_length: 2
+  num_prefixes: 5
+  n_trials: 10
+  ld1nn_sample_size: 500
+wandb:
+  project: 'nonce_lstm'

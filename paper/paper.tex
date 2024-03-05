@@ -1,0 +1,61 @@
+% !TEX TS-program = XeLaTeX
+
+% STYLE
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage[left=3cm,
+		    right=3cm,
+    		    top=3cm,
+		    bottom=3cm,
+		    bindingoffset=0cm]{geometry}
+		    \usepackage{array}
+\usepackage{float}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{subfig}
+\usepackage{enumerate}
+\usepackage[normalem]{ulem} % underlining
+\usepackage{booktabs} % tables
+\PassOptionsToPackage{table}{xcolor}% coloring tables
+
+% LANGUAGE + FONT
+		    
+\usepackage[english]{babel}
+\usepackage[backend=biber,
+                     style=unified]{biblatex}
+\newcommand{\citeay}[2][]{
+   \citeauthor{#2} (\citeyear[#1]{#2})}
+\addbibresource{ref.bib}
+\usepackage{fontspec}  
+\setmainfont{Minion 3}
+
+% DRAWING
+
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+\usetikzlibrary{shapes.geometric}
+\usetikzlibrary{trees,arrows}
+\usetikzlibrary{positioning}
+
+% LINGUISTICS 
+
+%\usepackage{gb4e}
+\usepackage{expex}
+\usepackage[glossaries]{leipzig}
+\makeglossaries
+%\newleipzig {indef} {indef} {Indefinite}
+
+\title{}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\abstract{}
+	
+		\section{} \label{}
+
+\printbibliography
+\end{document}

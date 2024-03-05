@@ -1,0 +1,30 @@
+data:
+  frequency_sampling: false
+  max_word_length: 10
+  min_word_length: 3
+  vocab_path: ./data/vocab_txts_short/tt_splits.txt
+device: cuda
+eval:
+  ld1nn_sample_size: 500
+  n_trials: 10
+  num_prefixes: 5
+  prefix_length: 2
+generate:
+  max_len: 256
+  temperature: 0.5
+log_path: ./logs/tt_short.log
+model:
+  embedding:
+    embedding_dim: 64
+  gru:
+    batch_first: true
+    hidden_size: 256
+    input_size: 64
+    num_layers: 5
+train:
+  batch_size: 1024
+  epochs: 50
+  lr: 0.0001
+  optim: null
+wandb:
+  project: nonce_lstm
