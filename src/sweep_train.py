@@ -8,10 +8,11 @@ import logging
 import yaml
 import numpy as np
 import wandb
-import argparse
+import os
+
 
 def train(config):
-#     wandb.login(key='7a9437f52186ae00051016cfdf42d1ae9ac2a248')
+    wandb.login(key=os.environ['WANDB_TOKEN'])
     run = wandb.init(project=config['wandb']['project'], name=extract_lang_name(config['data']['vocab_path']))
     logging.basicConfig(filename=config['log_path'],
                         filemode='w',
@@ -82,19 +83,21 @@ def train(config):
     artifact.add_file(model_path)
     run.log_artifact(artifact)
     run.finish()
-    
+
     return np.mean(val_history)
 
-def update_config_and_train(args):    
+
+def update_config_and_train(args):
     with open(args.config_path) as cnf:
         config = yaml.safe_load(cnf)
-        
+
     config['model']['embedding']['embedding_dim'] = args.embedding_dim
-    config['model']['gru']['input_size'] = args.embedding_dim # need to update input_dim too, TODO: reduce to one parameter
+    config['model']['gru'][
+        'input_size'] = args.embedding_dim  # need to update input_dim too, TODO: reduce to one parameter
     config['model']['gru']['hidden_size'] = args.hidden_size
     config['model']['gru']['num_layers'] = args.num_layers
     config['data']['min_word_length'] = args.min_word_length
     config['data']['max_word_length'] = args.max_word_length
     config['train']['lr'] = args.lr
-    
+
     return train(config)
